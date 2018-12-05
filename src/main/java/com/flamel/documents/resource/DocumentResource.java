@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -22,7 +23,14 @@ public class DocumentResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Document create(@RequestBody Document document) {
+    public Document create(@Valid @RequestBody Document document) {
         return documentRepository.save(document);
+    }
+
+    @DeleteMapping
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(@RequestBody Long id) {
+        documentRepository.deleteById(id);
+
     }
 }

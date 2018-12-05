@@ -4,12 +4,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
-import static com.flamel.documents.model.definitions.EntityDefaults.Columns.Validations.DEFAULT_SIZE_VALIDATION_MESSAGE;
-
-@Entity(name = "DOCUMENT")
+@Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Document {
@@ -21,16 +18,15 @@ public class Document {
     private Long id;
 
     @Column
-    @Size(max = 255, message = DEFAULT_SIZE_VALIDATION_MESSAGE)
-    @NotNull
+    @Size(max = 255, message = "generic-invalid-length")
+    @NotBlank(message = "generic-not-null")
     private String title;
 
     @Column
-    @Size(max = 1024, message = DEFAULT_SIZE_VALIDATION_MESSAGE)
+    @Size(max = 3, message = "generic-invalid-length")
     private String description;
 
     @Column
-    @NotNull
+    @NotNull(message = "document-30")
     private Integer status = Status.CADASTRADO.getValue();
-
 }
