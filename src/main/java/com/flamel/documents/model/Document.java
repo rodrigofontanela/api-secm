@@ -1,14 +1,18 @@
 package com.flamel.documents.model;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
-import javax.validation.constraints.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
 public class Document {
 
     @Id
@@ -18,15 +22,15 @@ public class Document {
     private Long id;
 
     @Column
-    @Size(max = 255, message = "generic-invalid-length")
-    @NotBlank(message = "generic-not-null")
+    @Size(max = 255, message = "DOC-010")
+    @NotBlank(message = "DOC-011")
     private String title;
 
     @Column
-    @Size(max = 3, message = "generic-invalid-length")
+    @Size(max = 3, message = "DOC-020")
     private String description;
 
     @Column
-    @NotNull(message = "document-30")
-    private Integer status = Status.CADASTRADO.getValue();
+    @NotNull
+    private Status status = Status.CADASTRADO;
 }

@@ -37,12 +37,12 @@ public class ApiExceptionHandler extends AbstractApiExceptionHandler {
 
     @ExceptionHandler(InvalidFormatException.class)
     public ResponseEntity<ErrorResponse> handleInvalidFormatException(final InvalidFormatException exception, final Locale locale) {
-        return ResponseEntity.badRequest().body(ErrorResponse.of(HttpStatus.BAD_REQUEST, toApiError("generic-invalid-value", locale, exception.getValue())));
+        return ResponseEntity.badRequest().body(ErrorResponse.of(HttpStatus.BAD_REQUEST, toApiError("GEN-010", locale, exception.getValue())));
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(final Exception exception, final Locale locale) {
         ApiLog.getLogger(ApiExceptionHandler.class).error("Error not expected", exception);
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR, toApiError("internal-server-error", locale)));
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorResponse.of(HttpStatus.INTERNAL_SERVER_ERROR, toApiError("INT-010", locale)));
     }
 }
